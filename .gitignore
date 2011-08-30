@@ -10,7 +10,7 @@ _build/
 .lwpcookies
 cover_db
 pod2htm*.tmp
-LeylandX-Starter-*
+DBIx-Define-*
 MYMETA.yml
 *.bak
 views/*.cache
