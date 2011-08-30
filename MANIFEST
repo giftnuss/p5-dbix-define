@@ -1,0 +1,16 @@
+README
+MANIFEST
+lib/DBIx/Define.pm
+lib/DBIx/Define/DBSchema.pm
+lib/DBIx/Define/Column.pm
+lib/DBIx/Define/Type.pm
+lib/DBIx/Define/Autoload.pm
+lib/DBIx/Define/Object.pm
+lib/DBIx/Define/Table.pm
+lib/DBIx/Define/Schema.pm
+lib/DBIx/Define/Translator.pm
+t/001_load.t
+t/002_more_explicit.t
+t/003_translator_start.t
+t/004_core_types.t
+Build.PL

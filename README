@@ -1,0 +1,4 @@
+
+This is just another database abstraction layer. The focus for
+this module is the Data Definition Language part of sql.
+
