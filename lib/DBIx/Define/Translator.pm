@@ -9,6 +9,7 @@
 ; use base 'SQL::Translator'
 ; use SQL::Translator::Schema::Constants
 ; use SQL::Translator::Schema::Constraint
+; use SQL::Translator::Schema::Index
 
 # load a D::D::Schema into SQL::Translator
 ; sub _use_schema
@@ -30,20 +31,35 @@
             ; $tc->is_nullable($column->type->is_nullable)
             ; $tc->size($column->type->size) 
                 if $column->type->can('size')
-	
-			; if($column->is_fk)
-			    { $self->_transform_fk($tt,$column)
+	     
+            ; if($column->is_fk)
+		{ $self->_transform_fk($tt,$column)
                 }
 				
             ; my @comments = $column->comments
             ; $tc->comments(@comments) if @comments
             }
-        ; my @pk = map { $_->name } $table->pk
-        ; my $pk = $tt->add_constraint(
-            # name => 'primary_key',
-             type => PRIMARY_KEY,
-             fields => \@pk);
+      
+        ; $self->_convert_keys($table => $tt)
+        ; $self->_convert_pk($table => $tt)
         }
+    }
+
+; sub _convert_keys
+    { my ($self, $dd_table, $st_table) = @_
+    ; foreach my $key ($dd_table->keys)
+        { my $type = $key->is_unique ? 'unique' : 'normal'
+        ; my $idx = $st_table->add_index(
+            name => $key->get_name,
+            fields => [ $key->get_column_names ],
+            type => $type)
+        }
+    }
+
+; sub _convert_pk
+    { my ($self, $dd_table, $st_table) = @_
+    ; my @pk = map { $_->name } $dd_table->pk
+    ; $st_table->add_constraint( type => PRIMARY_KEY, fields => \@pk)
     }
 
 ; sub _transform_fk

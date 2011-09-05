@@ -4,7 +4,7 @@ use Module::Build;
 
 Module::Build->new
     ( module_name     => 'DBIx::Define',
-      dist_version    => '0.01',
+      dist_version    => '0.02',
       dist_author     => 'Sebastian Knapp <sk@computer-leipzig.com>',
       license         => 'perl',
       create_makefile_pl => 'traditional',
@@ -12,12 +12,12 @@ Module::Build->new
 
       requires =>
           { perl => 5.006,
-            'HO::class' => '0.60',
+            'HO::class' => '0.05',
             'Package::Subroutine' => '0.14'
 	  },
       build_requires =>
           { 'Data::Section::Simple' => '0.02'
-          }
+          },
       recommends =>
           { 'SQL::Translator' => '0.11008'
           }

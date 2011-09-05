@@ -15,6 +15,8 @@
     ( schema     => 'DBIx::Define::Schema'
     , table      => 'DBIx::Define::Table'
     , column     => 'DBIx::Define::Column'
+    , key        => 'DBIx::Define::Key'
+
     , recordid   => 'DBIx::Define::Type::Recordid'
     , integer    => 'DBIx::Define::Type::Integer'
     , smallint   => 'DBIx::Define::Type::Smallint'

@@ -18,7 +18,7 @@
 
 ; sub foreign_key
     { my ($self,$table,$column) = @_
-    ; my $rs = new DBIx::Define::Relationship::
+    ; my $rs = DBIx::Define::Relationship->new
     ; $rs->[$rs->_is_fk] = 1
     ; $rs->entities(0)->[1] = $self->entity
     ; $rs->entities(1)->[0] = $table

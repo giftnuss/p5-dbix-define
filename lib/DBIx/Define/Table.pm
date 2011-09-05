@@ -6,6 +6,7 @@
 # ***************************
 ; use base 'DBIx::Define::Object'
 ; use DBIx::Define::Schema ()
+; use DBIx::Define::Key ()
 
 ; use HO::class
     init => 'hash',
@@ -15,7 +16,7 @@
     _rw => columns      => '@',    # database columns
     _ro => _colidx      => '%',
     _rw => pk           => '@',    # primary keys
-    _rw => dbindice     => '@'     # column index
+    _rw => keys         => '@'     # column index
 
 ; use overload
     '""' => sub { $_[0]->name },
@@ -55,13 +56,16 @@
         }
     }
 
-; sub set_primary_keys
-    { 
-    }
-
-; sub add_primary_key
+; sub add_to_primary_key
     { my ($self,$pk) = @_
     ; $self->pk('<',$pk)
+    ; $self
+    }
+
+; sub add_unique_key
+    { my ($self,@args) = @_
+    ; my $key = DBIx::Define::Key->new(is_unique => 1,@args)
+    ; $self->keys('<',$key) 
     ; $self
     }
 

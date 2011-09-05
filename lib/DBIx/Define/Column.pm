@@ -32,21 +32,27 @@
 
 ; sub pk
     { my ($self) = @_
-    ; DBIx::Define->current_table->add_primary_key($self)
+    ; DBIx::Define->current_table->add_to_primary_key($self)
+    ; $self
+    }
+
+; sub unique
+    { my ($self,@args) = @_
+    ; DBIx::Define->current_table->add_unique_key(columns => [$self],@args)
     ; $self
     }
 	
 ; sub fk
     { my ($self,$table,$column) = @_
     ; $self->[&_refs] = new DBIx::Define::Refs:: ($self) unless $self->refs
-	; $self->refs->foreign_key($table,$column)
-	; return $self
-	}
+    ; $self->refs->foreign_key($table,$column)
+    ; return $self
+    }
 	
 ; sub is_fk
     { my ($self) = @_
-	; return 0 + grep {$_->is_fk} $self->get_relationships
-	}
+    ; return 0 + grep {$_->is_fk} $self->get_relationships
+    }
 
 ; sub comment
     { my ($self,$comment) = @_
@@ -72,3 +78,22 @@ DBIx::Define::Column
 
 =head1 DESCRIPTION
 
+=head2 Constructors
+
+=over 4
+
+=item new
+
+=back
+
+=head2 Object Methods
+
+=over 4
+
+=item pk
+
+Add the column to the primary key for this table.
+
+=item unique
+
+Add a unique constraint to the table for this column.
