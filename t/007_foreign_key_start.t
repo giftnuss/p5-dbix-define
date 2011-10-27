@@ -4,7 +4,7 @@
 
 ; use Data::Dumper
 
-  ; use DBIx::Define ()
+; use DBIx::Define ()
 
 ; SKIP:
   { eval { require SQL::Translator } 
@@ -20,7 +20,7 @@
     ; DBIx::Define->table
 
     ; column( s_id => &recordid )->pk()
-	; column( player => &recordid )->fk('Player')
+    ; column( player => &recordid )->fk('Player')
     ; column( rand => &integer )
 
     ; package DbSchema::Dice

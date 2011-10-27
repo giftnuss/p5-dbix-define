@@ -13,7 +13,6 @@
 ; use DBIx::Define::Relationship
 ; use DBIx::Define::Schema
 ; use DBIx::Define::Table
-; use DBIx::Define::Type
 ############################################################
 # Import
 # subclass should import it or rewrite it.
@@ -149,8 +148,6 @@
     ; my $translator = new DBIx::Define::Translator::
 
     ; $translator->_load_schema($dbh)
-; use Data::Dumper
-; print Dumper($translator)
     }
 
 ################################################################################

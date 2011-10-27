@@ -3,6 +3,7 @@
 ; our $VERSION='0.01'
 # *******************
 
+; use DBIx::Define::Types
 # this is a placeholder for a more specialized and flexible
 # solution.
 
@@ -14,7 +15,7 @@
     ; return if $sub eq 'DESTROY';#'end'
 
     ; unshift(@_ => 'name') if @_%2
-    ; my $type = DBIx::Define::Type->get_type_object($sub,@_)
+    ; my $type = DBIx::Define::Types->get_type_object($sub,@_)
 
     ; my $objects = 
         { 'column' => sub
