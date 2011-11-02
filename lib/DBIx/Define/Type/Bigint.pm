@@ -7,8 +7,10 @@
 
 ; sub init
     { my ($self,%args) = @_
-    ; $self->[$self->_data_type] = 'bigint'
     ; $self->SUPER::init(%args)
+    ; $self->[$self->_data_type] = 'bigint'
+    ; $self->[$self->_size] = defined($args{'size'}) ? $args{'size'} : undef
+    ; return $self
     }
 
 ;1

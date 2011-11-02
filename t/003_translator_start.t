@@ -10,7 +10,7 @@
   ; skip 'SQL::Translator is not installed',3 if $@
   ; use_ok('DBIx::Define::Translator')
 
-  ; my $translator = new DBIx::Define::Translator
+  ; my $translator = DBIx::Define::Translator->new
   ; isa_ok($translator,'DBIx::Define::Translator')
   ; isa_ok($translator,'SQL::Translator')
 
