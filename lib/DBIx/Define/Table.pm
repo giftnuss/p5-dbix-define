@@ -4,7 +4,6 @@
 ; our $VERSION  ='0.02'
 ; our $AUTHORITY='cpan:SKNPP'
 # ***************************
-; use base 'DBIx::Define::Object'
 ; use DBIx::Define::Schema ()
 ; use DBIx::Define::Key ()
 

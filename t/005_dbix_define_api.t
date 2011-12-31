@@ -1,6 +1,6 @@
 # -*- perl -*-
 ; use strict; use warnings
-; use Test::More tests => 18
+; use Test::More tests => 17
 
 ; use DBIx::Define
 

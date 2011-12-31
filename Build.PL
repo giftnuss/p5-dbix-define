@@ -18,7 +18,8 @@ Module::Build->new
             'parent' => 0
 	  },
       build_requires =>
-          { 'Data::Section::Simple' => '0.02'
+          { 'Test::More' => 0,
+            'Data::Section::Simple' => '0.02'
           },
       recommends =>
           { 'SQL::Translator' => '0.11008'
