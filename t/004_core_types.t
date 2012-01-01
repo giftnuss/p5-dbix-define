@@ -35,8 +35,12 @@
     ; column( amount => &money )
 
     ; column( start => &datetime )
+    ; column( meeting => &time )
+    ; column( event => &date )
 
-#    ; column( 
+    ; column( name => &varchar )
+    ; column( description => &text )
+
     ; $it = DBIx::Define->translate('dbschema')
     }
 
