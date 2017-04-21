@@ -28,7 +28,7 @@
     , identifier => 'DBIx::Define::Type::Identifier'
     , sentence   => 'DBIx::Define::Type::Sentence'
     , text       => 'DBIx::Define::Type::Text'
-    , word     => 'DBIx::Define::Type::Word'
+    , word       => 'DBIx::Define::Type::Word'
 
     , date     => 'DBIx::Define::Type::Date'
     , time     => 'DBIx::Define::Type::Time'
