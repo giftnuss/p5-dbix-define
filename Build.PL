@@ -15,13 +15,14 @@ Module::Build->new
             'HO::class' => '0.05',
             'Package::Subroutine' => '0.14.000',
             'Class::Load' => 0,
-            'parent' => 0
+            'parent' => 0,
+        'SQL::Translator' => '0.11021'
       },
       build_requires =>
           { 'Test::More' => 0,
-            'Data::Section::Simple' => '0.02'
-          },
-      recommends =>
-          { 'SQL::Translator' => '0.11008'
+            'Data::Section::Simple' => '0.02',
+        'Test::Exception' => '0.43',
+        'DBI' => '1.636',
+        'DBD::SQLite' => '1.54'
           }
     )->create_build_script;
