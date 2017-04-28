@@ -59,7 +59,7 @@ SET foreign_key_checks=0;
 --
 CREATE TABLE `Pool` (
   `s_id` integer NOT NULL,
-  `rand` integer(11),
+  `rand` integer(11) NULL,
   PRIMARY KEY (`s_id`)
 );
 
@@ -68,8 +68,8 @@ CREATE TABLE `Pool` (
 --
 CREATE TABLE `Dice` (
   `s_id` integer NOT NULL,
-  `type` integer(11),
-  `cnt` integer(11)
+  `type` integer(11) NULL,
+  `cnt` integer(11) NULL
 );
 
 --
@@ -77,7 +77,7 @@ CREATE TABLE `Dice` (
 --
 CREATE TABLE `Player` (
   `s_id` integer NOT NULL,
-  `name` varchar(120)
+  `name` varchar(120) NULL
 );
 
 SET foreign_key_checks=1;
@@ -175,5 +175,3 @@ CREATE TABLE "Player" (
   "s_id" number NOT NULL,
   "name" varchar2(120)
 );
-
-/

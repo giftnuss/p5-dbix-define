@@ -142,6 +142,34 @@
     ; $translator
     }
 
+; sub table_iterator
+    { my ($self,$schema,$producer) = @_
+    ; $schema = $self->get_schema($schema)
+        unless ref($schema) && $schema->isa('DBIx::Define::Schema')
+
+    ; require DBIx::Define::Translator
+    ; require DBIx::Define::Table::DDL
+
+    ; my @tables = $schema->get_tables
+    
+    ; return sub
+        { (my $table = shift @tables) or return
+        ; my $tr = new DBIx::Define::Translator::(
+            'no_comments' => 1,
+            'add_drop_table' => 1
+        )
+        ; $tr->_use_schema($schema,$table->name)
+        ; $tr->producer_args->{no_transaction} = 1
+        
+        ; my $str = $tr->producer($producer)->($tr)
+        ; my ($drop,$create) = split /\n\n/,$str
+        
+        ; return DBIx::Define::Table::DDL->new(
+            create => $create, drop => $drop, table => $table
+        )
+        }
+    }
+
 ; sub load_schema
     { my ($self,$dbh) = @_
     ; require DBIx::Define::Translator

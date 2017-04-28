@@ -10,17 +10,21 @@
 ; use SQL::Translator::Schema::Constants
 ; use SQL::Translator::Schema::Constraint
 ; use SQL::Translator::Schema::Index
+; use DBIx::Define::Table::DDL
 
 # load a D::D::Schema into SQL::Translator
 ; sub _use_schema
-    { my ($self,$schema) = @_
+    { my ($self,$schema,$tablename) = @_
     ; $schema->objectify
 
     ; my $to = $self->schema
     ; $to->name($schema->name)
 
     ; foreach my $table ($schema->get_tables)
-        { my $tt = $to->add_table(name => $table->name)
+        { if(defined $tablename)
+            { next unless $tablename eq $table->name
+            }
+        ; my $tt = $to->add_table(name => $table->name)
         ; foreach my $column ($table->get_columns)
             { my $tc = $tt->add_field
                 ( name => $column->name
@@ -31,11 +35,11 @@
             ; $tc->is_nullable($column->type->is_nullable)
             ; $tc->size($column->type->size) 
                 if $column->type->can('size')
-	     
+         
             ; if($column->is_fk)
-		{ $self->_transform_fk($tt,$column)
+        { $self->_transform_fk($tt,$column)
                 }
-				
+                
             ; my @comments = $column->comments
             ; $tc->comments(@comments) if @comments
             }
@@ -64,11 +68,11 @@
 
 ; sub _transform_fk
     { my ($self,$tt,$column) = @_
-	; my @constraints
+    ; my @constraints
     ; my @fk = grep {$_->is_fk} $column->get_relationships
-	
-	; foreach my $rs (@fk)
-	    { $tt->add_constraint
+    
+    ; foreach my $rs (@fk)
+        { $tt->add_constraint
              ( name => $rs->name
              , type => FOREIGN_KEY
              , fields => $column->name
@@ -77,23 +81,7 @@
              , match_type => 'full'
              )
             or die($tt->error)
-	    }
-    }
-
-###############################################################################
-
-; sub only_for_table
-    { my ($self,$keep) = @_
-    ; my $filter = sub
-        { my $schema = shift
-        ; foreach my $table ($schema->get_tables)
-            { $schema->drop_table($table) unless
-                $table->name eq $keep
-            }
         }
-    ; $self->filters($filter)
-    ; $self->producer_args->{no_transaction} = 1
-    ; return $self
     }
 
 ###############################################################################
