@@ -17,17 +17,17 @@
     ; unshift(@_ => 'name') if @_%2
     ; my $type = DBIx::Define::Types->get_type_object($sub,@_)
 
-    ; my $objects = 
+    ; my $objects =
         { 'column' => sub
             { DBIx::Define->current_table->add_column($type)
             ; return
             }
         , 'table' => sub
-	    { DBIx::Define->set_current_table($type)
+            { DBIx::Define->set_current_table($type)
             ; return
             }
         , 'schema' => sub
-	    { DBIx::Define->set_current_schema($type)
+            { DBIx::Define->set_current_schema($type)
             }
         }
     ; $objects->{$sub}->() if ref($objects->{$sub}) eq 'CODE'

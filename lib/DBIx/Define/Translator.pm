@@ -6,7 +6,7 @@
 
 ; use Carp ()
 
-; use base 'SQL::Translator'
+; use parent 'SQL::Translator'
 ; use SQL::Translator::Schema::Constants
 ; use SQL::Translator::Schema::Constraint
 ; use SQL::Translator::Schema::Index
@@ -33,17 +33,17 @@
             ; $tc->default_value($column->type->default)
                 if $column->type->has_default
             ; $tc->is_nullable($column->type->is_nullable)
-            ; $tc->size($column->type->size) 
+            ; $tc->size($column->type->size)
                 if $column->type->can('size')
-         
+
             ; if($column->is_fk)
         { $self->_transform_fk($tt,$column)
                 }
-                
+
             ; my @comments = $column->comments
             ; $tc->comments(@comments) if @comments
             }
-      
+
         ; $self->_convert_keys($table => $tt)
         ; $self->_convert_pk($table => $tt)
         }
@@ -70,7 +70,7 @@
     { my ($self,$tt,$column) = @_
     ; my @constraints
     ; my @fk = grep {$_->is_fk} $column->get_relationships
-    
+
     ; foreach my $rs (@fk)
         { $tt->add_constraint
              ( name => $rs->name
@@ -87,10 +87,11 @@
 ###############################################################################
 
 ; sub _load_schema
-    { my ($self,$dbh) = @_
+    { my ($self,$dbh,$schemaname) = @_
     ; my $one = $self->parser('DBI')
     ; $self->parser_args(dbh => $dbh)
     ; $self->parse
+    ; return  $self->schema
     }
 
 ; 1

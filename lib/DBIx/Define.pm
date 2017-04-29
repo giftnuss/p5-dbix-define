@@ -111,7 +111,7 @@
 ; sub set_current_table
     { my ($self,$table) = @_
     ; my $schema = $self->current_schema
-    ; $schema->add_table($table) 
+    ; $schema->add_table($table)
         unless $schema->has_table($table->name)
     ; $currenttable = $table
     }
@@ -151,19 +151,20 @@
     ; require DBIx::Define::Table::DDL
 
     ; my @tables = $schema->get_tables
-    
+
     ; return sub
         { (my $table = shift @tables) or return
         ; my $tr = new DBIx::Define::Translator::(
             'no_comments' => 1,
-            'add_drop_table' => 1
+            'add_drop_table' => 1,
+            'quote_identifiers' => 1
         )
         ; $tr->_use_schema($schema,$table->name)
         ; $tr->producer_args->{no_transaction} = 1
-        
+
         ; my $str = $tr->producer($producer)->($tr)
-        ; my ($drop,$create) = split /\n\n/,$str
-        
+        ; my ($drop,$create) = map { chomp ; $_ } split /\n\n/,$str
+
         ; return DBIx::Define::Table::DDL->new(
             create => $create, drop => $drop, table => $table
         )
@@ -171,11 +172,18 @@
     }
 
 ; sub load_schema
-    { my ($self,$dbh) = @_
+    { my ($self,$dbh,$schemaname) = @_
     ; require DBIx::Define::Translator
     ; my $translator = new DBIx::Define::Translator::
 
-    ; $translator->_load_schema($dbh)
+    ; $self->_build_schema($translator->_load_schema($dbh),$schemaname)
+    }
+
+; sub _build_schema
+    { my ($self,$dbschema,$schemaname) = @_
+    ; my $schema = DBIx::Define->new_schema('schema' => $schemaname)
+    ; $schema->_build_schema($dbschema)
+    ; $schema
     }
 
 ################################################################################
@@ -247,7 +255,7 @@ named parameter.
 =item provide_column => 'package'
 
 The given package should provide a column function, which is exported
-instead of the function from DBIx::Define. The given class needs to be 
+instead of the function from DBIx::Define. The given class needs to be
 loaded manualy before the import call.
 
 =item provide_tblindex
