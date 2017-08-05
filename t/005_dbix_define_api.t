@@ -1,12 +1,14 @@
 # -*- perl -*-
 ; use strict; use warnings
-; use Test::More tests => 17
+; my $tests
+; BEGIN { $tests = 19 }
+; use Test::More tests => $tests
 
 ; use DBIx::Define
 
 ; SKIP:
     { eval { require Test::ClassAPI }
-    ; skip "Test::ClassAPI not installed.",17 if $@
+    ; skip "Test::ClassAPI not installed.",$tests if $@
 
     ; Test::ClassAPI->execute('complete')
     }
@@ -33,4 +35,5 @@ register_table=method
 set_current_schema=method
 set_current_table=method
 table=method
+table_iterator=method
 translate=method

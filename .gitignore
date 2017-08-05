@@ -12,6 +12,7 @@ cover_db
 pod2htm*.tmp
 DBIx-Define-*
 MYMETA.yml
+MYMETA.json
 *.bak
 views/*.cache
 *.log

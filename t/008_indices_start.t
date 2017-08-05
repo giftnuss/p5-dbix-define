@@ -25,9 +25,15 @@
 
   ; foreach my $db (qw/MySQL SQLite PostgreSQL Oracle/)
     { 
-      my $sql = join("\x0a",grep { $_ !~ /-- Created on/ } 
-	 split(/\n/,''.$it->producer($db)->($it)) ) . "\x0a";
-      is($sql,get_data_section(lc $db),"DB $db");#print $sql
+      my @get = grep { $_ !~ /-- Created on/ } 
+         split(/\n/,''.$it->producer($db)->($it));
+      my @exp = split(/\n/, get_data_section(lc $db));
+      subtest( "DB $db" => sub {
+         is(scalar(@get),scalar(@exp),'linecount');
+         for(my $i=0; $i<@get; ++$i) {
+             is($get[$i],$exp[$i],"$db: line @{[$i+1]}");
+         }
+      })
     }
   }
 
@@ -43,7 +49,7 @@ SET foreign_key_checks=0;
 --
 CREATE TABLE `project` (
   `project_id` integer NOT NULL,
-  `name` varchar(32),
+  `name` varchar(32) NULL,
   UNIQUE INDEX `name_idx` (`name`),
   PRIMARY KEY (`project_id`)
 );
@@ -64,8 +70,6 @@ CREATE TABLE "project" (
 );
 
 CREATE UNIQUE INDEX "name_idx" on "project" ("name");
-
-/
 @@ sqlite
 -- 
 -- Created by SQL::Translator::Producer::SQLite

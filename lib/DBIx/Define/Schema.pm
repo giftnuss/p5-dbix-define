@@ -62,6 +62,22 @@
 
 ################################################################################
 
+; sub _build_schema
+    { my ($self,$dbschema) = @_
+    ; foreach my $dbtable ($dbschema->get_tables)
+        { my $table = DBIx::Define->new_table(table => $dbtable->name)
+        ; foreach my $dbcolumn ($dbtable->get_fields)
+            { my $sub = 'text'
+            ; my $type = DBIx::Define::Types->get_type_object($sub)
+            ; my @args = ($dbcolumn->name,$type)
+            ; my $col = DBIx::Define::Types->get_type_object('column',@args)
+            ; $table->add_column($col)
+            }
+        ; $self->add_table($table)
+        }
+
+    }
+
 ; 1
 
 __END__

@@ -35,7 +35,7 @@ SET foreign_key_checks=0;
 
 CREATE TABLE `Pool` (
   `s_id` integer NOT NULL comment 'a unique number',
-  `rand` integer(11) comment 'a random number',
+  `rand` integer(11) NULL comment 'a random number',
   PRIMARY KEY (`s_id`)
 );
 
@@ -81,8 +81,6 @@ CREATE TABLE "Pool" (
   "rand" number(11),
   PRIMARY KEY ("s_id")
 );
-
-/
 
 __SQL__
   ; is($oracle,$expect_oracle,'Oracle')
