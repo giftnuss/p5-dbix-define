@@ -4,8 +4,8 @@ use Module::Build;
 
 Module::Build->new
     ( module_name     => 'DBIx::Define',
-      dist_version    => '0.03',
-      dist_author     => 'Sebastian Knapp <rock@ccls-online.de>',
+      dist_version    => '0.03.001',
+      dist_author     => 'Mike Würfel <sknpp@cpan.org>',
       license         => 'perl',
       create_makefile_pl => 'traditional',
       dist_abstract   => 'abstract DDL statements with ORM support',
@@ -16,8 +16,8 @@ Module::Build->new
             'Package::Subroutine' => '0.14.000',
             'Class::Load' => 0,
             'parent' => 0,
-        'SQL::Translator' => '0.11021'
-      },
+            'SQL::Translator' => '0.11021'
+          },
       build_requires =>
           { 'Test::More' => 0,
             'Data::Section::Simple' => '0.02',
