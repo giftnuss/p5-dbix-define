@@ -12,7 +12,7 @@ Module::Build->new
 
       requires =>
           { perl => 5.006,
-            'HO::class' => '0.05',
+            'HO::class' => '0.078',
             'Package::Subroutine' => '0.14.000',
             'Class::Load' => 0,
             'parent' => 0,
