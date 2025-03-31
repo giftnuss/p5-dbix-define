@@ -1,6 +1,7 @@
 # -*- perl -*-
 
 ; use Test::More tests => 7
+; use Test::Differences
 
 ; use Data::Section::Simple qw/ get_data_section /
 ; use DBIx::Define ()
@@ -24,14 +25,14 @@
     ; package DbSchema::Dice
     ; DBIx::Define->table
 
-    ; column ( s_id => &recordid )
+    ; column ( s_id => &recordid )->pk()
     ; column ( type => &integer )
     ; column ( cnt  => &integer )
 
     ; package DbSchema::Player
     ; DBIx::Define->table
 
-    ; column ( s_id => &recordid )
+    ; column ( s_id => &recordid )->pk()
     ; column ( name => &varchar(64) )
 
     ; $it = DBIx::Define->translate('dbschema')
@@ -42,16 +43,16 @@
   ; foreach my $db (qw/MySQL SQLite PostgreSQL Oracle/)
     { 
       my $sql = join("\x0a",grep { $_ !~ /-- Created on/ } 
-	 split(/\n/,''.$it->producer($db)->($it)) ) . "\x0a";
-      is($sql,get_data_section(lc $db),"DB $db");#print ''.$it->producer($db)->($it)
+           split(/\n/,''.$it->producer($db)->($it)) ) . "\x0a";
+      eq_or_diff($sql,get_data_section(lc $db),"DB $db");#print ''.$it->producer($db)->($it)
     }
   }
 
 __DATA__
 @@ mysql
--- 
+--
 -- Created by SQL::Translator::Producer::MySQL
--- 
+--
 SET foreign_key_checks=0;
 
 --
@@ -69,7 +70,8 @@ CREATE TABLE `Pool` (
 CREATE TABLE `Dice` (
   `s_id` integer NOT NULL,
   `type` integer(11) NULL,
-  `cnt` integer(11) NULL
+  `cnt` integer(11) NULL,
+  PRIMARY KEY (`s_id`)
 );
 
 --
@@ -77,14 +79,15 @@ CREATE TABLE `Dice` (
 --
 CREATE TABLE `Player` (
   `s_id` integer NOT NULL,
-  `name` varchar(120) NULL
+  `name` varchar(120) NULL,
+  PRIMARY KEY (`s_id`)
 );
 
 SET foreign_key_checks=1;
 @@ postgresql
--- 
+--
 -- Created by SQL::Translator::Producer::PostgreSQL
--- 
+--
 --
 -- Table: Pool
 --
@@ -100,7 +103,8 @@ CREATE TABLE "Pool" (
 CREATE TABLE "Dice" (
   "s_id" integer NOT NULL,
   "type" bigint,
-  "cnt" bigint
+  "cnt" bigint,
+  PRIMARY KEY ("s_id")
 );
 
 --
@@ -108,12 +112,13 @@ CREATE TABLE "Dice" (
 --
 CREATE TABLE "Player" (
   "s_id" integer NOT NULL,
-  "name" character varying(120)
+  "name" character varying(120),
+  PRIMARY KEY ("s_id")
 );
 @@ sqlite
--- 
+--
 -- Created by SQL::Translator::Producer::SQLite
--- 
+--
 
 BEGIN TRANSACTION;
 
@@ -129,7 +134,7 @@ CREATE TABLE Pool (
 -- Table: Dice
 --
 CREATE TABLE Dice (
-  s_id int NOT NULL,
+  s_id INTEGER PRIMARY KEY NOT NULL,
   type int(11),
   cnt int(11)
 );
@@ -138,15 +143,15 @@ CREATE TABLE Dice (
 -- Table: Player
 --
 CREATE TABLE Player (
-  s_id int NOT NULL,
+  s_id INTEGER PRIMARY KEY NOT NULL,
   name varchar(120)
 );
 
 COMMIT;
 @@ oracle
--- 
+--
 -- Created by SQL::Translator::Producer::Oracle
--- 
+--
 --
 -- Table: Pool
 --;
@@ -164,7 +169,8 @@ CREATE TABLE "Pool" (
 CREATE TABLE "Dice" (
   "s_id" number NOT NULL,
   "type" number(11),
-  "cnt" number(11)
+  "cnt" number(11),
+  PRIMARY KEY ("s_id")
 );
 
 --
@@ -173,5 +179,6 @@ CREATE TABLE "Dice" (
 
 CREATE TABLE "Player" (
   "s_id" number NOT NULL,
-  "name" varchar2(120)
+  "name" varchar2(120),
+  PRIMARY KEY ("s_id")
 );

@@ -39,9 +39,9 @@
 
 __DATA__
 @@ mysql
--- 
+--
 -- Created by SQL::Translator::Producer::MySQL
--- 
+--
 SET foreign_key_checks=0;
 
 --
@@ -56,9 +56,9 @@ CREATE TABLE `project` (
 
 SET foreign_key_checks=1;
 @@ oracle
--- 
+--
 -- Created by SQL::Translator::Producer::Oracle
--- 
+--
 --
 -- Table: project
 --;
@@ -69,11 +69,11 @@ CREATE TABLE "project" (
   PRIMARY KEY ("project_id")
 );
 
-CREATE UNIQUE INDEX "name_idx" on "project" ("name");
+CREATE UNIQUE INDEX "name_idx" ON "project" ("name");
 @@ sqlite
--- 
+--
 -- Created by SQL::Translator::Producer::SQLite
--- 
+--
 
 BEGIN TRANSACTION;
 
@@ -89,9 +89,9 @@ CREATE UNIQUE INDEX name_idx ON project (name);
 
 COMMIT;
 @@ postgresql
--- 
+--
 -- Created by SQL::Translator::Producer::PostgreSQL
--- 
+--
 --
 -- Table: project
 --
