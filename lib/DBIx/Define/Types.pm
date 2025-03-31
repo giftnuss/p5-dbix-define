@@ -1,9 +1,34 @@
   package DBIx::Define::Types;
 # ***************************;
-  our $VERSION = '0.01';
+  our $VERSION = '0.02';
 # *********************;
 ; use strict; use warnings; use utf8
-; use Class::Load ()
+
+; use DBIx::Define::Schema ()
+; use DBIx::Define::Table  ()
+; use DBIx::Define::Column ()
+; use DBIx::Define::Key    ()
+
+; use DBIx::Define::Type::Recordid ()
+; use DBIx::Define::Type::Integer  ()
+; use DBIx::Define::Type::Smallint ()
+; use DBIx::Define::Type::Bigint   ()
+
+; use DBIx::Define::Type::Number  ()
+; use DBIx::Define::Type::Double  ()
+; use DBIx::Define::Type::Decimal ()
+; use DBIx::Define::Type::Money   ()
+
+; use DBIx::Define::Type::Char       ()
+; use DBIx::Define::Type::Varchar    ()
+; use DBIx::Define::Type::Identifier ()
+; use DBIx::Define::Type::Sentence   ()
+; use DBIx::Define::Type::Text       ()
+; use DBIx::Define::Type::Word       ()
+
+; use DBIx::Define::Type::Date     ()
+; use DBIx::Define::Type::Time     ()
+; use DBIx::Define::Type::Datetime ()
 
 ; our %CONSTR
 
@@ -51,7 +76,6 @@
 
 ; sub register_type
     { my ($self,$type,$class) = @_
-    ; Class::Load::load_class($class)
     ; $CONSTR{$type} = $class
     }
 
