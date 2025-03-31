@@ -13,10 +13,10 @@ Module::Build->new
       requires =>
           { perl => 5.006,
             'HO::class' => '0.078',
-            'Package::Subroutine' => '0.14.000',
+            'Package::Subroutine' => '0.22.04',
             'Class::Load' => 0,
             'parent' => 0,
-            'SQL::Translator' => '0.11021'
+            'SQL::Translator' => '1.66'
           },
       build_requires =>
           { 'Test::More' => 0,
