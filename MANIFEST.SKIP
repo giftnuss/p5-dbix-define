@@ -1,5 +1,15 @@
+# personal
+requirements.txt
+requirements-dev.txt
+install.sh
+ENV.sh
+\bvendor/
+\bbin/
+
 # Version Control
 \B\.svn\b
+\B\.git\b
+.gitignore
 
 # Build process
 \bblib/
@@ -18,3 +28,5 @@
 # release
 ^DBIx-Define-\d+\.\d*\.tar\.gz$
 ^DBIx-Define-\d+\.?\d*_\d+\.tar\.gz$
+^MYMETA\.yml$
+^MYMETA\.json$
