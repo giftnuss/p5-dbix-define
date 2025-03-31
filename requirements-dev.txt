@@ -1,0 +1,6 @@
+Devel::Cover~1.44
+DBD::SQLite~0
+Data::Section::Simple~0
+Test::Exception~0
+Carp::Always~0
+Test::Differences~0.61
