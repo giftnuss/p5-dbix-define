@@ -6,6 +6,7 @@ Build
 Build.bat
 _build/
 .build/
+vendor/
 *.tar.gz
 .lwpcookies
 cover_db
