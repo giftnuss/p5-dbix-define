@@ -7,5 +7,13 @@ cd $__DIR__
 mkdir -p bin
 mkdir -p vendor
 
-cpanm -L vendor --self-contained <requirements.txt
-cpanm -L vendor --self-contained <requirements-dev.txt
+
+if [ -n "$MINICPAN" ] ; then
+    FROM="--from $MINICPAN"
+else
+    FROM=""
+fi
+
+
+cpanm -L vendor $FROM --self-contained <requirements.txt
+cpanm -L vendor $FROM --self-contained <requirements-dev.txt
