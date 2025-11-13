@@ -1,9 +1,10 @@
-  package DBIx::Define
-; use strict; use warnings
-# **********************
-; our $VERSION='0.03'
-; our $AUTHORITY='SKNPP'
-# **********************
+  package DBIx::Define;
+# *********************
+  use strict; use warnings;
+# *************************
+  our $VERSION='0.03';
+  our $AUTHORITY='SKNPP';
+# ***********************
 ; use Carp ()
 ############################################################
 ; use Package::Subroutine
